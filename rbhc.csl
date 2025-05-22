@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="never">
+  <info>
+    <title>Revue Belge d'Histoire Contemporaine</title>
+    <id>http://www.zotero.org/styles/rbhc</id>
+    <author>
+      <name>Xavier GILLARD</name>
+    </author>
+    <category citation-format="note"/>
+    <category field="history"/>
+    <updated>2025-05-22T10:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="fr">
+    <terms>
+      <term name="et-al">et al.</term>
+      <term name="ibid">Idem</term>
+      <term name="volume" form="short">t.</term>
+      <term name="in" form="short">in</term>
+      <term name="accessed">consulté le</term>
+    </terms>
+  </locale>
+  <macro name="contributors-long">
+    <names variable="author editor" delimiter=", ">
+      <name form="long" and="symbol" initialize-with=". " delimiter=", " name-as-sort-order="first">
+        <name-part name="family"  text-case="uppercase" />
+      </name>
+      <label form="short" prefix=" (" suffix=")" text-case="capitalize-first"/>
+    </names>
+  </macro>
+  <macro name="secondary-contributors">
+    <names variable="editor translator" delimiter=", ">
+      <label form="short" suffix=". " text-case="capitalize-first"/>
+      <name and="symbol" initialize-with=". " delimiter=", " >
+        <name-part name="family"  text-case="uppercase" />
+      </name>
+    </names>
+  </macro>
+  <macro name="container-title">
+    <group delimiter=" ">
+      <text term="in" form="short" font-style="normal"/>
+      <text macro="secondary-contributors" suffix=", "/>
+      <text variable="container-title" font-style="italic"/>
+    </group>
+  </macro>
+  <macro name="publisher-place-date">
+    <group delimiter=", ">
+      <text variable="publisher-place"/>
+      <date variable="issued" form="text" date-parts="year"/>
+    </group>
+  </macro>
+  <macro name="book-full-note">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <text variable="title" font-style="italic"/>
+      <group delimiter=" ">
+        <text term="volume" form="short" suffix=". "/>
+        <text variable="volume"/>
+      </group>
+      <text macro="publisher-place-date"/>
+    </group>
+  </macro>
+  <macro name="article-journal-full-note">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <text variable="title" quotes="true"/>
+      <text variable="container-title" font-style="italic"/>
+      <group delimiter="/">
+        <text variable="issue"/>
+        <text variable="volume"/>
+      </group>
+      <date variable="issued" form="text" date-parts="year"/>
+    </group>
+  </macro>
+  <macro name="chapter-full-note">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <text variable="title" quotes="true"/>
+      <group delimiter=", ">
+        <text macro="container-title"/>
+        <text macro="publisher-place-date"/>
+      </group>
+    </group>
+  </macro>
+  <macro name="thesis-full-note">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <text variable="title" font-style="italic"/>
+      <text variable="genre"/>
+      <text variable="publisher"/>
+      <date variable="issued" form="text" date-parts="year"/>
+    </group>
+  </macro>
+  <macro name="webpage-full-note">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="contributors-long"/>
+        </if>
+      </choose>
+      <text variable="title"/>
+      <text variable="container-title" prefix="site web de "/>
+      <text variable="URL" prefix=" &lt;" suffix="&gt;"/>
+      <date variable="accessed" prefix="consulté le ">
+        <date-part name="day"/>
+        <date-part name="month" form="long"/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+  <macro name="archive-full-note">
+    <group delimiter=" ">
+      <text variable="title"/>
+      <group delimiter=", " prefix="(" suffix=")">
+        <text variable="archive_location"/>
+        <text variable="collection-title" font-style="italic"/>
+        <text variable="call-number"/>
+      </group>
+    </group>
+  </macro>
+  <macro name="newspaper-article-full-note">
+    <group delimiter=", ">
+      <text variable="container-title" font-style="italic"/>
+      <date variable="issued">
+        <date-part name="day"/>
+        <date-part name="month" form="long"/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+  <macro name="full-note-citation">
+    <choose>
+      <if position="ibid">
+        <text term="ibid" font-style="italic"/>
+      </if>
+      <else-if position="subsequent">
+        <choose>
+          <if match="any" locator="page" position="subsequent">
+            <text macro="contributors-long"/>
+            <text variable="title" font-style="italic" prefix=", "/>
+          </if>
+          <else-if match="all" locator="page" position="subsequent">
+            <text macro="contributors-long"/>
+            <text variable="title" font-style="italic" prefix=", "/>
+          </else-if>
+          <else>
+            <text term="ibid" form="short" font-style="italic"/>
+          </else>
+        </choose>
+      </else-if>
+      <else>
+        <choose>
+          <if type="book">
+            <text macro="book-full-note"/>
+          </if>
+          <else-if type="article-journal">
+            <text macro="article-journal-full-note"/>
+          </else-if>
+          <else-if type="chapter">
+            <text macro="chapter-full-note"/>
+          </else-if>
+          <else-if type="thesis">
+            <text macro="thesis-full-note"/>
+          </else-if>
+          <else-if type="webpage post-weblog">
+            <text macro="webpage-full-note"/>
+          </else-if>
+          <else-if type="document personal_communication" match="any">
+            <text macro="archive-full-note"/>
+          </else-if>
+          <else-if type="article-newspaper article-magazine" match="any">
+            <text macro="newspaper-article-full-note"/>
+          </else-if>
+          <else>
+            <group delimiter=", ">
+              <text macro="contributors-long"/>
+              <text variable="title" font-style="italic"/>
+              <date variable="issued" form="text" date-parts="year"/>
+            </group>
+          </else>
+        </choose>
+      </else>
+    </choose>
+  </macro>
+  <citation et-al-min="4" et-al-use-first="1" collapse="citation-number">
+    <layout delimiter="; " suffix=".">
+      <group delimiter=", ">
+        <text macro="full-note-citation"/>
+        <text variable="locator"/>
+      </group>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <text macro="full-note-citation"/>
+    </layout>
+  </bibliography>
+</style>
