@@ -128,6 +128,22 @@
       </date>
     </group>
   </macro>
+  <macro name="research-report">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <text variable="title" font-style="italic"/>
+      <group delimiter=" ">
+        <text variable="publisher"/>
+        <group prefix="(" suffix=")" delimiter=", ">
+          <text variable="publisher-place"/>
+        </group>
+      </group>
+      <date variable="issued" form="text" date-parts="year"/>
+    </group>
+    <group prefix=". DOI: ">
+      <text variable="DOI" prefix="https://doi.org/"/>
+    </group>
+  </macro>
   <macro name="full-note-citation">
     <choose>
       <if position="ibid">
@@ -170,6 +186,9 @@
           </else-if>
           <else-if type="article-newspaper article-magazine" match="any">
             <text macro="newspaper-article-full-note"/>
+          </else-if>
+          <else-if type="report">
+            <text macro="research-report" />
           </else-if>
           <else>
             <group delimiter=", ">
