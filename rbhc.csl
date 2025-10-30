@@ -101,7 +101,7 @@
       <text variable="title"/>
       <text variable="container-title" prefix="site web de "/>
       <text variable="URL" prefix=" &lt;" suffix="&gt;"/>
-      <date variable="accessed" prefix="consulté le ">
+      <date variable="accessed" prefix="consulté le " delimiter=" ">
         <date-part name="day"/>
         <date-part name="month" form="long"/>
         <date-part name="year"/>
