@@ -186,7 +186,11 @@
     <layout delimiter="; " suffix=".">
       <group delimiter=", ">
         <text macro="full-note-citation"/>
-        <text variable="locator"/>
+        
+        <group delimiter=" ">
+          <label variable="locator" />
+          <text variable="locator"/>
+        </group>
       </group>
     </layout>
   </citation>
