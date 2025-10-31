@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="never">
+  <!-- Truc utile si on veut pouvoir éditer le style et connaitre le nom de champs etc.. -->
+  <!-- https://service.elsevier.com/app/answers/detail/a_id/22175/supporthub/mendeley/   -->
   <info>
     <title>Revue Belge d'Histoire Contemporaine</title>
     <id>http://www.zotero.org/styles/rbhc</id>
@@ -128,6 +130,8 @@
       </date>
     </group>
   </macro>
+  
+  <!-- Rapports de recherche -->
   <macro name="research-report">
     <group delimiter=", ">
       <text macro="contributors-long"/>
@@ -144,6 +148,31 @@
       <text variable="DOI" prefix="https://doi.org/"/>
     </group>
   </macro>
+
+  <!-- Papier de conférence -->
+  <macro name="paper-conference">
+    <group delimiter=", ">
+      <text macro="contributors-long"/>
+      <group delimiter=" ">
+        <text variable="title" font-style="italic"/>
+        <text variable="container-title" prefix="in " />
+      </group>
+      <group delimiter=" ">
+        <text variable="publisher"/>
+        <group prefix="(" suffix=")" delimiter=", ">
+          <text variable="publisher-place"/>
+        </group>
+      </group>
+      <date variable="issued" form="text" date-parts="year"/>
+    </group>
+    <group prefix=". DOI: ">
+      <text variable="DOI" prefix="https://doi.org/"/>
+    </group>
+    <group prefix=". URL: ">
+      <text variable="URL" prefix=" &lt;" suffix="&gt;"/>
+    </group>
+  </macro>
+
   <macro name="full-note-citation">
     <choose>
       <if position="ibid">
@@ -190,12 +219,11 @@
           <else-if type="report">
             <text macro="research-report" />
           </else-if>
+          <else-if type="paper-conference">
+            <text macro="paper-conference" />
+          </else-if>
           <else>
-            <group delimiter=", ">
-              <text macro="contributors-long"/>
-              <text variable="title" font-style="italic"/>
-              <date variable="issued" form="text" date-parts="year"/>
-            </group>
+            <text macro="research-report" />
           </else>
         </choose>
       </else>
